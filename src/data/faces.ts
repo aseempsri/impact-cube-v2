@@ -287,25 +287,39 @@ export const PROBLEMS = [
   {
     challenge: 'Big missions, limited specialist teams',
     response: 'Flexible access to multidisciplinary institutional capabilities.',
+    accent: '#2563A6',
+    icon: 'team' as const,
   },
   {
     challenge: 'Processes depend on individuals',
     response: 'Process mapping, SOPs, workflows and system strengthening.',
+    accent: '#0A9B93',
+    icon: 'process' as const,
   },
   {
     challenge: 'Data is collected but underused',
     response: 'Assessment, analytics, dashboards and decision support.',
+    accent: '#E49B24',
+    icon: 'data' as const,
   },
   {
     challenge: 'Fundraising is reactive',
     response: 'Support in fundraising strategy and documents.',
+    accent: '#4B9560',
+    icon: 'funding' as const,
   },
   {
     challenge: 'Reports and presentations consume programme time',
     response: 'Structured documentation and knowledge products.',
+    accent: '#D9665B',
+    icon: 'docs' as const,
   },
   {
     challenge: 'Technology adds complexity',
     response: 'Simple, affordable tools aligned to actual workflows.',
+    accent: '#6557C7',
+    icon: 'tech' as const,
   },
 ]
+
+export type ProblemIconId = (typeof PROBLEMS)[number]['icon']

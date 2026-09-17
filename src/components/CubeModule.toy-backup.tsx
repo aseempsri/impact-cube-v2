@@ -1,22 +1,20 @@
+/**
+ * BACKUP — toy / plastic cube (cute solid frame look).
+ * Not used by the app. To restore: copy this file over CubeModule.tsx
+ * and paste styles from src/styles/cube-toy-backup.css into styles.css.
+ */
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { FACES, type CubeSlot, type Face } from '../data/faces'
 import { ArrowIcon, FaceIcon } from './Icons'
 
-const VIEW_X = -22
-const VIEW_Y = -38
-
-/**
- * Keep top/bottom tips under ~60° so side faces stay upright (a full ±90°
- * X turn lays the cube flat and makes neighbours look splayed open).
- */
 const ROTATIONS: Record<CubeSlot, string> = {
-  front: `rotateX(${VIEW_X}deg) rotateY(${VIEW_Y}deg)`,
-  right: `rotateX(${VIEW_X}deg) rotateY(${VIEW_Y - 90}deg)`,
-  back: `rotateX(${VIEW_X}deg) rotateY(${VIEW_Y - 180}deg)`,
-  left: `rotateX(${VIEW_X}deg) rotateY(${VIEW_Y + 90}deg)`,
-  top: `rotateX(-58deg) rotateY(${VIEW_Y}deg)`,
-  bottom: `rotateX(48deg) rotateY(${VIEW_Y}deg)`,
+  front: 'rotateX(-22deg) rotateY(-38deg)',
+  right: 'rotateX(-22deg) rotateY(-128deg)',
+  back: 'rotateX(-22deg) rotateY(-218deg)',
+  left: 'rotateX(-22deg) rotateY(52deg)',
+  top: 'rotateX(-112deg) rotateY(-38deg)',
+  bottom: 'rotateX(68deg) rotateY(-38deg)',
 }
 
 const SLOT_CLASS: Record<CubeSlot, string> = {
@@ -96,16 +94,13 @@ export function CubeModule({ labelledBy, featured = false, onActiveFaceChange }:
 
   function advance() {
     setAutoplay(false)
-    setActive((i) => {
-      const next = (i + 1) % FACES.length
-      return next
-    })
+    setActive((i) => (i + 1) % FACES.length)
     setPanelKey((k) => k + 1)
   }
 
   return (
     <div
-      className={`cube-module cube-module--glass${featured ? ' cube-module--featured' : ''}${autoplay ? ' is-autoplaying' : ''}`}
+      className={`cube-module${featured ? ' cube-module--featured' : ''}${autoplay ? ' is-autoplaying' : ''}`}
       aria-labelledby={labelledBy}
       style={
         {
@@ -123,7 +118,6 @@ export function CubeModule({ labelledBy, featured = false, onActiveFaceChange }:
           aria-label={`Showing ${face.name}. Click to see the next face.`}
         >
           <div className="cube-glow" aria-hidden="true" />
-          <div className="cube-glass-aura" aria-hidden="true" />
 
           <div className="cube-float" aria-hidden="true">
             <div className="cube3d" style={{ transform: ROTATIONS[face.slot] }}>
@@ -139,24 +133,19 @@ export function CubeModule({ labelledBy, featured = false, onActiveFaceChange }:
                 <div
                   key={f.id}
                   className={`cube-face ${SLOT_CLASS[f.slot]}${f.id === face.id ? ' is-front' : ''}`}
-                  style={
-                    {
-                      ['--face-accent' as string]: f.accent,
-                      ['--face-deep' as string]: f.cubeBg,
-                      ['--face-ink-local' as string]: f.ink,
-                    } as CSSProperties
-                  }
                 >
-                  <div className="cube-face-shell">
-                    <div className="cube-face-rim" />
-                    <div className="cube-face-tint">
-                      <span className="cube-face-sheen" />
-                      <span className="cube-face-num">{f.num}</span>
-                      <span className="cube-face-icon">
-                        <FaceIcon id={f.id} />
-                      </span>
-                      <span className="cube-face-label">{f.name}</span>
-                    </div>
+                  <div
+                    className="cube-face-plate"
+                    style={{
+                      background: `linear-gradient(155deg, ${f.accent} 0%, ${f.cubeBg} 78%)`,
+                      boxShadow: `inset 0 0 0 1px ${f.accent}55`,
+                    }}
+                  >
+                    <span className="cube-face-num">{f.num}</span>
+                    <span className="cube-face-icon">
+                      <FaceIcon id={f.id} />
+                    </span>
+                    <span className="cube-face-label">{f.name}</span>
                   </div>
                 </div>
               ))}

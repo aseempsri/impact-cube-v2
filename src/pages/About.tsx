@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Placeholder } from '../components/Placeholder'
+import { HeartOrgIcon, TeamIcon } from '../components/Icons'
+import { SceneImage } from '../components/SceneImage'
 
 const AUDIENCES = [
   {
@@ -32,21 +33,20 @@ export function About() {
 
   return (
     <>
-      <section className="hero" style={{ paddingBottom: 56 }}>
+      <section className="page-hero">
         <div className="container grid-2">
           <div>
-            <p className="eyebrow">About Impact Cube</p>
+            <p className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              About Impact Cube
+            </p>
             <h1>Your extended institutional support team.</h1>
             <p className="lede">
               Impact Cube exists to strengthen the institutional backbone behind social-impact work —
               so that strong programmes are matched by strong organisations.
             </p>
           </div>
-          <Placeholder
-            variant="wide"
-            label="Team or office photo"
-            note="authentic, in-context photo — not staged stock imagery"
-          />
+          <SceneImage scene="about" aspect="wide" className="scene--float" />
         </div>
       </section>
 
@@ -54,7 +54,10 @@ export function About() {
         <div className="container">
           <div className="grid-2">
             <div>
-              <p className="eyebrow">Why we exist</p>
+              <p className="eyebrow">
+                <span className="eyebrow-dot" aria-hidden="true" />
+                Why we exist
+              </p>
               <h2>Strong programmes need strong organisations.</h2>
               <p className="max-prose">
                 Many organisations possess strong programme knowledge, committed teams and deep
@@ -66,7 +69,10 @@ export function About() {
               </p>
             </div>
             <div>
-              <p className="eyebrow">How we are different</p>
+              <p className="eyebrow">
+                <span className="eyebrow-dot" aria-hidden="true" />
+                How we are different
+              </p>
               <h2>Diagnosis, design and delivery — together.</h2>
               <p className="max-prose">
                 We are not positioned as another generic NGO consultancy, and not simply a freelance
@@ -74,6 +80,9 @@ export function About() {
                 broader needs and systems, and we stay involved until the solution is actually in
                 use.
               </p>
+              <div style={{ marginTop: 20 }}>
+                <SceneImage scene="pattern" aspect="wide" />
+              </div>
             </div>
           </div>
         </div>
@@ -82,17 +91,29 @@ export function About() {
       <section className="section">
         <div className="container">
           <div className="section-head center">
-            <p className="eyebrow">Who we work with</p>
+            <p className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              Who we work with
+            </p>
             <h2>Built for organisations with big missions and lean teams.</h2>
           </div>
-          <div className="grid-3">
+          <div className="audience-grid">
             {AUDIENCES.map((a) => (
-              <div className="model-card" key={a.title}>
+              <div className="audience-tile" key={a.title}>
+                <div className="aud-icon" aria-hidden="true">
+                  <HeartOrgIcon />
+                </div>
                 <h3>{a.title}</h3>
                 <p className="small mb-0">{a.body}</p>
               </div>
             ))}
-            <div className="model-card" style={{ background: 'var(--teal-light)', borderColor: 'transparent' }}>
+            <div
+              className="audience-tile"
+              style={{ background: 'linear-gradient(160deg, var(--teal-light), var(--warm))', borderColor: 'transparent' }}
+            >
+              <div className="aud-icon" aria-hidden="true">
+                <TeamIcon />
+              </div>
               <h3>Not sure where you fit?</h3>
               <p className="small mb-0">
                 Most organisations recognise themselves in more than one profile.{' '}
@@ -103,32 +124,62 @@ export function About() {
         </div>
       </section>
 
-      <section className="section section-soft">
+      <section className="section section-fun">
         <div className="container">
           <div className="section-head">
-            <p className="eyebrow">Our team</p>
-            <h2>The people behind the six faces.</h2>
-            <p className="max-prose">
-              [Placeholder: short note on team structure — e.g. a core team plus specialist
-              associates across strategy, systems, technology, insights, sustainability and
-              communication.]
+            <p className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              Our team
             </p>
+            <h2>The people behind the six faces.</h2>
           </div>
           <div className="team-grid">
-            {[1, 2, 3, 4].map((n) => (
-              <div className="team-card" key={n}>
-                <Placeholder
-                  variant="portrait"
-                  person
-                  label={`Team headshot ${n}`}
-                  note="Placeholder headshot"
-                />
-                <h4>[Placeholder: name {n}]</h4>
-                <p className="role">[Placeholder: role / face specialism]</p>
-                <p>
-                  [Placeholder: one-line background — prior organisation or relevant sector
-                  experience.]
-                </p>
+            {[
+              {
+                name: 'Rajneesh',
+                title: 'Strategy lead',
+                role: 'Strategy & planning',
+                note: 'Direction, Theory of Change, roadmaps',
+                photo: `${import.meta.env.BASE_URL}images/team-strategy-lead.jpg`,
+                alt: 'Rajneesh, Strategy lead, seated at a desk in a bright office',
+              },
+              {
+                name: 'Aman',
+                title: 'Systems lead',
+                role: 'Systems & operations',
+                note: 'SOPs, workflows, governance',
+                photo: `${import.meta.env.BASE_URL}images/team-systems-lead.jpg`,
+                alt: 'Aman, Systems lead, seated at a desk in a bright office',
+              },
+              {
+                name: 'Shubhram',
+                title: 'Insights lead',
+                role: 'Insights & MEL',
+                note: 'Evidence, dashboards, learning loops',
+                photo: `${import.meta.env.BASE_URL}images/team-insights-lead.jpg`,
+                alt: 'Shubhram, Insights lead, working at a laptop in a bright office',
+              },
+              {
+                name: 'Aseem',
+                title: 'Comms lead',
+                role: 'Communication',
+                note: 'Reports, stories, stakeholder clarity',
+                photo: `${import.meta.env.BASE_URL}images/team-comms-lead.jpg`,
+                alt: 'Aseem, Comms lead, working at a laptop in a bright office',
+              },
+            ].map((t) => (
+              <div className="team-card" key={t.name}>
+                {t.photo ? (
+                  <figure className="scene scene--portrait scene--float team-photo">
+                    <img src={t.photo} alt={t.alt ?? t.name} loading="lazy" decoding="async" />
+                  </figure>
+                ) : (
+                  <SceneImage scene="motif" aspect="portrait" />
+                )}
+                <h4>{t.name}</h4>
+                {t.title ? <p className="team-title">{t.title}</p> : null}
+                <p className="role">{t.role}</p>
+                <p>{t.note}</p>
               </div>
             ))}
           </div>
@@ -142,7 +193,7 @@ export function About() {
             <Link to="/how-we-work" className="btn btn-secondary">
               How We Work
             </Link>
-            <Link to="/contact" className="btn btn-primary">
+            <Link to="/contact" className="btn btn-primary btn-lift">
               Get in Touch
             </Link>
           </div>

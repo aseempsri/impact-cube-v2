@@ -2,7 +2,16 @@ import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { FACES, getFaceBySlug } from '../data/faces'
 import { FaceIcon } from '../components/Icons'
-import { Placeholder } from '../components/Placeholder'
+import { SceneImage } from '../components/SceneImage'
+
+const FACE_SCENES = {
+  strategy: 'strategy',
+  systems: 'method',
+  technology: 'health',
+  insights: 'reporting',
+  sustainability: 'funding',
+  communication: 'community',
+} as const
 
 export function FacePage() {
   const { slug } = useParams<{ slug: string }>()
@@ -17,7 +26,7 @@ export function FacePage() {
   return (
     <>
       <section
-        className="hero face-hero"
+        className="hero face-hero page-hero"
         style={
           {
             ['--accent' as string]: face.accent,
@@ -39,46 +48,45 @@ export function FacePage() {
               </Link>
             ))}
           </div>
-          <div style={{ marginTop: 30 }}>
-            <div className="face-icon-lg">
-              <FaceIcon id={face.id} />
+          <div style={{ marginTop: 30 }} className="grid-2">
+            <div>
+              <div className="face-icon-lg">
+                <FaceIcon id={face.id} />
+              </div>
+              <p className="eyebrow" style={{ color: face.ink }}>
+                Face {face.num} of 6
+              </p>
+              <h1>{face.headline}</h1>
+              <p className="lede">{face.question}</p>
+              <p style={{ fontWeight: 700, color: face.ink, fontSize: '1.05rem' }}>{face.purpose}</p>
+              <div className="hero-ctas">
+                <Link to="/contact" className="btn btn-primary btn-lift">
+                  {face.ctaLabel}
+                </Link>
+                <Link to="/the-cube" className="btn btn-secondary">
+                  See All Six Faces
+                </Link>
+              </div>
             </div>
-            <p className="eyebrow" style={{ color: face.ink }}>
-              Face {face.num} of 6
-            </p>
-            <h1>{face.headline}</h1>
-            <p className="lede">{face.question}</p>
-            <p style={{ fontWeight: 600, color: face.ink, fontSize: '1.05rem' }}>{face.purpose}</p>
-            <div className="hero-ctas">
-              <Link to="/contact" className="btn btn-primary">
-                {face.ctaLabel}
-              </Link>
-              <Link to="/the-cube" className="btn btn-secondary">
-                See All Six Faces
-              </Link>
-            </div>
+            <SceneImage scene={FACE_SCENES[face.id]} aspect="wide" className="scene--float" />
           </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="container grid-2">
-          <div>
-            <p className="eyebrow">Capabilities</p>
+        <div className="container">
+          <div className="section-head">
+            <p className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              Capabilities
+            </p>
             <h2>What this face covers.</h2>
-            <ul className="cap-list" style={{ ['--accent' as string]: face.accent }}>
-              {face.capabilities.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
           </div>
-          <div>
-            <Placeholder
-              variant="wide"
-              label={`Illustration or workshop photo for ${face.name}`}
-              note="diagram or authentic team photo"
-            />
-          </div>
+          <ul className="cap-list" style={{ ['--accent' as string]: face.accent }}>
+            {face.capabilities.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -89,7 +97,7 @@ export function FacePage() {
               <p className="eyebrow" style={{ color: face.ink, marginBottom: 6 }}>
                 {face.note.label}
               </p>
-              <p className="mb-0" style={{ fontWeight: 600, color: 'var(--navy)' }}>
+              <p className="mb-0" style={{ fontWeight: 700, color: 'var(--navy)' }}>
                 {face.note.text}
               </p>
             </div>
@@ -100,10 +108,13 @@ export function FacePage() {
       <section className="section section-soft">
         <div className="container">
           <div className="section-head">
-            <p className="eyebrow">{face.approachEyebrow}</p>
+            <p className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              {face.approachEyebrow}
+            </p>
             <h2>Diagnose. Design. Deliver.</h2>
           </div>
-          <div className="method-steps">
+          <div className="method-steps method-steps--light">
             <div className="method-step">
               <p className="num">01</p>
               <h3>Diagnose</h3>
@@ -145,7 +156,7 @@ export function FacePage() {
                 Every engagement starts with a conversation about where your organisation is today.
               </p>
             </div>
-            <Link to="/contact" className="btn btn-primary">
+            <Link to="/contact" className="btn btn-primary btn-lift">
               Strengthen Your Organisation
             </Link>
           </div>

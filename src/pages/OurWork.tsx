@@ -2,10 +2,37 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { CASE_STUDIES, FACES, type FaceId } from '../data/faces'
 import { ArrowIcon } from '../components/Icons'
-import { Placeholder } from '../components/Placeholder'
+import { SceneImage, sceneForCase } from '../components/SceneImage'
 
 function faceMeta(id: FaceId) {
   return FACES.find((f) => f.id === id)!
+}
+
+const CASE_BLURBS: Record<number, { title: string; summary: string }> = {
+  1: {
+    title: 'Stronger reporting for an education NGO',
+    summary: 'Systems, technology, insights and communication working together for clearer donor and board reporting.',
+  },
+  2: {
+    title: 'Funding readiness for a growing nonprofit',
+    summary: 'Strategy and sustainability support to move from reactive fundraising to a clearer funding pipeline.',
+  },
+  3: {
+    title: 'Field-to-office knowledge systems',
+    summary: 'Practical documentation and communication rhythms that free programme time without losing field voice.',
+  },
+  4: {
+    title: 'Learning loops that teams actually use',
+    summary: 'Insights and sustainability paired so evidence informs both programme decisions and resource planning.',
+  },
+  5: {
+    title: 'From person-dependent to system-enabled',
+    summary: 'Strategy, systems and technology redesigned so growth does not rely on a handful of heroes.',
+  },
+  6: {
+    title: 'Stories that match the numbers',
+    summary: 'Communication face work that turns dense institutional progress into clear stakeholder narratives.',
+  },
 }
 
 export function OurWork() {
@@ -15,10 +42,13 @@ export function OurWork() {
 
   return (
     <>
-      <section className="hero" style={{ paddingBottom: 50 }}>
+      <section className="page-hero">
         <div className="container">
           <div className="section-head">
-            <p className="eyebrow">Proof</p>
+            <p className="eyebrow">
+              <span className="eyebrow-dot" aria-hidden="true" />
+              Proof
+            </p>
             <h1>Our Work</h1>
             <p className="lede">
               Each case study is tagged by the faces it strengthened — because most real
@@ -37,53 +67,47 @@ export function OurWork() {
       <section className="section">
         <div className="container">
           <div className="grid-3">
-            {CASE_STUDIES.map((c) => (
-              <div className="case-card" key={c.id}>
-                <Placeholder
-                  variant="wide"
-                  label={`Case study photo or diagram ${c.id}`}
-                  note="field, workshop or report visual"
-                />
-                <div className="case-body">
-                  <div className="case-tags">
-                    {c.faces.map((id) => {
-                      const f = faceMeta(id)
-                      return (
-                        <span
-                          key={id}
-                          className="tag-chip"
-                          style={{ background: `${f.accent}22`, color: f.ink }}
-                        >
-                          {f.name}
-                        </span>
-                      )
-                    })}
+            {CASE_STUDIES.map((c) => {
+              const blurb = CASE_BLURBS[c.id]
+              return (
+                <div className="case-card" key={c.id}>
+                  <SceneImage scene={sceneForCase(c.id)} aspect="wide" />
+                  <div className="case-body">
+                    <div className="case-tags">
+                      {c.faces.map((id) => {
+                        const f = faceMeta(id)
+                        return (
+                          <span
+                            key={id}
+                            className="tag-chip"
+                            style={{ background: `${f.accent}22`, color: f.ink }}
+                          >
+                            {f.name}
+                          </span>
+                        )
+                      })}
+                    </div>
+                    <h3>{blurb.title}</h3>
+                    <p className="small">{blurb.summary}</p>
+                    <Link to="/contact" className="face-link small" style={{ fontWeight: 700 }}>
+                      Talk about similar work <ArrowIcon />
+                    </Link>
                   </div>
-                  <h3>{c.title}</h3>
-                  <p className="small">
-                    [Placeholder: challenge] → [Placeholder: approach] → [Placeholder: outcome,
-                    verified metric where available]
-                  </p>
-                  <Link to="/contact" className="face-link small" style={{ fontWeight: 600 }}>
-                    Read more <ArrowIcon />
-                  </Link>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
           <p className="hint" style={{ marginTop: 24 }}>
-            All six case studies above are placeholders. Replace titles, tags, imagery and outcomes
-            with real, permissioned client examples before publishing — outcomes should use verified
-            metrics where available, or careful qualitative evidence otherwise. Add a client
-            testimonial only with explicit permission.
+            Case titles and imagery are illustrative until replaced with permissioned client
+            examples and verified outcomes.
           </p>
         </div>
       </section>
 
-      <section className="section section-soft section-tight">
+      <section className="section section-fun section-tight">
         <div className="container center">
           <h2>Want to see how this could work for your organisation?</h2>
-          <Link to="/contact" className="btn btn-primary">
+          <Link to="/contact" className="btn btn-primary btn-lift">
             Start a Conversation
           </Link>
         </div>

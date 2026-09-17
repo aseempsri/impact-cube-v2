@@ -3,7 +3,7 @@
 React + TypeScript + Vite site for Impact Cube.
 Deployed automatically to **GitHub Pages** on every push to `main`.
 
-**Live site:** https://aseempsri.github.io/impact-cube/
+**Live site:** https://aseempsri.github.io/impact-cube-v2/
 
 ## Preview locally
 
@@ -12,7 +12,7 @@ npm install
 npm run dev
 ```
 
-Then open the URL Vite prints (usually http://localhost:5173/impact-cube/).
+Then open the URL Vite prints (usually http://localhost:5173/impact-cube-v2/).
 
 ## Build
 
@@ -23,7 +23,7 @@ npm run preview
 
 ## Deploy
 
-Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the app and
+Pushing to `main` runs `.github/workflows/deployment.yaml`, which builds the app and
 publishes `dist/` to GitHub Pages.
 
 In the repo **Settings → Pages**, set Source to **GitHub Actions** (required once).

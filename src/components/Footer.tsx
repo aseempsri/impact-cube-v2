@@ -11,9 +11,9 @@ export function Footer() {
             <div className="footer-brand">
               <BrandMark /> IMPACT CUBE
             </div>
-            <p style={{ maxWidth: 280 }}>
+            <p style={{ maxWidth: 300 }}>
               Stronger Organisations. Greater Impact. We help social-impact organisations
-              strengthen the capabilities behind their mission.
+              strengthen the colourful, connected capabilities behind their mission.
             </p>
           </div>
           <div>
@@ -22,7 +22,7 @@ export function Footer() {
               {FACES.map((f) => (
                 <li key={f.id}>
                   <Link to={f.path}>
-                    {f.num} — {f.name}
+                    <span style={{ color: f.accent, fontWeight: 700 }}>{f.num}</span> — {f.name}
                   </Link>
                 </li>
               ))}
@@ -49,19 +49,18 @@ export function Footer() {
             <h4>Contact</h4>
             <ul>
               <li>
-                <span className="ph-note" style={{ color: '#9FB2C0' }}>
-                  [Placeholder: general enquiries email]
-                </span>
+                <a href="mailto:info@adrika.co.in">info@adrika.co.in</a>
               </li>
               <li>
-                <span className="ph-note" style={{ color: '#9FB2C0' }}>
-                  [Placeholder: phone number]
-                </span>
+                <a href="tel:+919318441235">+91-9318441235</a>
               </li>
               <li>
-                <span className="ph-note" style={{ color: '#9FB2C0' }}>
-                  [Placeholder: city / registered address]
-                </span>
+                <a href="tel:+919235777101">+91-9235777101</a>
+              </li>
+              <li>
+                597, Airhe Road, Chandmari, Post- Lamhi
+                <br />
+                Varanasi, Uttar Pradesh - 221007
               </li>
             </ul>
           </div>
