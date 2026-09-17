@@ -5,11 +5,15 @@ type IconProps = { className?: string }
 
 export function BrandMark({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className={className}>
-      <path d="M20 3 L35 11.5 V28.5 L20 37 L5 28.5 V11.5 Z" fill="#E8F7F5" stroke="#15324A" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="M20 3 V20 M20 20 L35 11.5 M20 20 L5 11.5 M20 20 V37" stroke="#07847E" strokeWidth="1.6" strokeLinejoin="round" />
-      <circle cx="20" cy="20" r="3" fill="#F0B429" stroke="#07847E" strokeWidth="1.2" />
-    </svg>
+    <img
+      src={`${import.meta.env.BASE_URL}images/logo-cube.png`}
+      alt=""
+      aria-hidden="true"
+      className={className ? `brand-mark ${className}` : 'brand-mark'}
+      width={36}
+      height={36}
+      decoding="async"
+    />
   )
 }
 
