@@ -3,7 +3,7 @@
 React + TypeScript + Vite site for Impact Cube.
 Deployed automatically to **GitHub Pages** on every push to `main`.
 
-**Live site:** https://aseempsri.github.io/impact-cube-v2/
+**Live site:** https://impactcube.in/
 
 ## Preview locally
 
@@ -12,7 +12,7 @@ npm install
 npm run dev
 ```
 
-Then open the URL Vite prints (usually http://localhost:5173/impact-cube-v2/).
+Then open the URL Vite prints (usually http://localhost:5173/).
 
 ## Build
 
@@ -26,7 +26,24 @@ npm run preview
 Pushing to `main` runs `.github/workflows/deployment.yaml`, which builds the app and
 publishes `dist/` to GitHub Pages.
 
-In the repo **Settings → Pages**, set Source to **GitHub Actions** (required once).
+In the repo **Settings → Pages**:
+1. Set Source to **GitHub Actions**
+2. Under Custom domain, enter `impactcube.in` and save
+3. Wait for DNS check, then enable **Enforce HTTPS**
+
+### Hostinger DNS (impactcube.in)
+
+Point the apex and `www` at GitHub Pages (keep MX / email TXT records as they are):
+
+| Type | Name | Content | TTL |
+|------|------|---------|-----|
+| A | `@` | `185.199.108.153` | 300 |
+| A | `@` | `185.199.109.153` | 300 |
+| A | `@` | `185.199.110.153` | 300 |
+| A | `@` | `185.199.111.153` | 300 |
+| CNAME | `www` | `aseempsri.github.io` | 300 |
+
+Delete the old Hostinger A record (`@` → `2.57.91.91`) and change `www` so it no longer points at `impactcube.in`.
 
 ## Structure
 
