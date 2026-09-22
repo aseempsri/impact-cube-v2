@@ -160,12 +160,12 @@ export function About() {
                 alt: 'Shubhram, Insights lead, working at a laptop in a bright office',
               },
               {
-                name: 'Aseem',
+                name: 'Aditi',
                 title: 'Comms lead',
                 role: 'Communication',
                 note: 'Reports, stories, stakeholder clarity',
                 photo: `${import.meta.env.BASE_URL}images/team-comms-lead.jpg`,
-                alt: 'Aseem, Comms lead, working at a laptop in a bright office',
+                alt: 'Aditi, Comms lead, working at a laptop in a bright office',
               },
             ].map((t) => (
               <div className="team-card" key={t.name}>
